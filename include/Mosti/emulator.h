@@ -1,3 +1,11 @@
+/**
+ * @file
+ * @author Bryan SebaRaj <bryanwsebaraj@gmail.com>
+ * @version 1.0
+ * @section DESCRIPTION
+ * This file contains the definition of the CPU class and its methods. 
+ */
+
 #ifndef EMULATOR_H
 #define EMULATOR_H
 
@@ -33,18 +41,44 @@ struct Registers {
 bool operator==(Flags const& lhs, Flags const& rhs);
 bool operator==(Registers const& lhs, Registers const& rhs);
 
+/**
+ * @brief CPU class
+ * 
+ * Provides an interface to the CPU of the emulator.
+ * 
+ * Contains the registers, flags, and memory of the CPU.
+ * 
+ * Provides methods to execute a program and get the state of the CPU.
+ */
 class CPU {
 private:
     Registers reg{};
     Flags flags{};
-    // memory, with 0x0000-0xFFFF range for main mem, vram
     std::array<uint8_t, 0x10000> mem{};
     double clock_speed = CLOCK_SPEED_MHZ;
 
 public:
+    /**
+    * @return CPU's flags: n, v, b, d, i, z, and c.
+    */
     Flags get_flags() const;
+
+    /**
+    * @return CPU's registers: a, x, y, pc, and sp. 
+    */
     Registers get_registers() const;
+
+    /**
+     * @param address The address to access in memory.
+     * @return CPU's memory, a 16-bit address space. 0x0000-0xFFFF. main mem and vram.
+     */
     uint8_t get_memory(uint16_t address) const;
+
+    /**
+     * Execute a program
+     * @param program A span of bytes representing the program to be executed. 
+     * @return The number of cycles taken to execute the program. 
+     */
     std::size_t execute(std::span<const std::uint8_t> program);
 };
 
