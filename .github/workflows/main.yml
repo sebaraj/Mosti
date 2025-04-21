@@ -1,0 +1,20 @@
+---
+name: Build and Test Mosti Library
+on:
+  push:
+    branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: bryanwsebaraj/mosti:latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build & Test
+        run: |
+          mkdir build
+          cd build
+          conan install .. --build=missing -of . -v
+          cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release
+          cmake --build .
+          ninja test
