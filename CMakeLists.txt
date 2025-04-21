@@ -1,6 +1,6 @@
 # set(CMAKE_C_COMPILER "/opt/homebrew/Cellar/llvm/20.1.3/bin/clang")
 # set(CMAKE_CXX_COMPILER "/opt/homebrew/Cellar/llvm/20.1.3/bin/clang++")
-cmake_minimum_required(VERSION 4.0)
+cmake_minimum_required(VERSION 3.22)
 project(Mosti VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 23)
