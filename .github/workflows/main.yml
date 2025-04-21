@@ -15,7 +15,7 @@ jobs:
           mkdir build
           cd build
           conan profile detect
-          conan install .. --build=missing -of . -v
-          cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release
+          conan install .. --build=missing -of . -v -g CMakeToolchain -g CMakeDeps
+          cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=build/conan_toolchain.cmake
           cmake --build .
           ninja test
