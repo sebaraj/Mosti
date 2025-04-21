@@ -9,10 +9,9 @@
 #ifndef EMULATOR_H
 #define EMULATOR_H
 
-#include <stdbool.h>
-#include <stdint.h>
-
 #include <array>
+#include <cstddef>
+#include <cstdint>
 #include <span>
 
 #ifndef CLOCK_SPEED_MHZ
