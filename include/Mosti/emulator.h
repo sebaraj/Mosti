@@ -3,7 +3,7 @@
  * @author Bryan SebaRaj <bryanwsebaraj@gmail.com>
  * @version 1.0
  * @section DESCRIPTION
- * This file contains the definition of the CPU class and its methods. 
+ * This file contains the definition of the CPU class and its methods.
  */
 
 #ifndef EMULATOR_H
@@ -28,6 +28,7 @@ struct Flags {
     bool i;
     bool z;
     bool c;
+    Flags() : n(false), v(false), b(false), d(false), i(false), z(false), c(false) {};
 };
 
 struct Registers {
@@ -36,6 +37,7 @@ struct Registers {
     uint8_t y;         // Y Register
     uint16_t pc;       // Program Counter
     uint8_t sp{0xff};  // Stack Pointer
+    Registers() : a(0), x(0), y(0), pc(0), sp(0xff) {};
 };
 
 bool operator==(Flags const& lhs, Flags const& rhs);
@@ -43,11 +45,11 @@ bool operator==(Registers const& lhs, Registers const& rhs);
 
 /**
  * @brief CPU class
- * 
+ *
  * Provides an interface to the CPU of the emulator.
- * 
+ *
  * Contains the registers, flags, and memory of the CPU.
- * 
+ *
  * Provides methods to execute a program and get the state of the CPU.
  */
 class CPU {
@@ -59,13 +61,13 @@ private:
 
 public:
     /**
-    * @return CPU's flags: n, v, b, d, i, z, and c.
-    */
+     * @return CPU's flags: n, v, b, d, i, z, and c.
+     */
     Flags get_flags() const;
 
     /**
-    * @return CPU's registers: a, x, y, pc, and sp. 
-    */
+     * @return CPU's registers: a, x, y, pc, and sp.
+     */
     Registers get_registers() const;
 
     /**
@@ -76,10 +78,12 @@ public:
 
     /**
      * Execute a program
-     * @param program A span of bytes representing the program to be executed. 
-     * @return The number of cycles taken to execute the program. 
+     * @param program A span of bytes representing the program to be executed.
+     * @return The number of cycles taken to execute the program.
      */
     std::size_t execute(std::span<const std::uint8_t> program);
+
+    CPU() : reg{}, flags{}, mem{} {};
 };
 
 }  // namespace emulator
