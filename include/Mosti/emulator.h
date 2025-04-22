@@ -60,9 +60,20 @@ private:
 
 public:
     /**
+     * @bried Default constructor
+     */
+
+    CPU() : reg{}, flags{}, mem{} {};
+
+    /**
      * @return CPU's flags: n, v, b, d, i, z, and c.
      */
     Flags get_flags() const;
+
+    /**
+     * @return CPU's flags: n, v, b, d, i, z, and c as a byte.
+     */
+    std::uint8_t serialize_flags() const;
 
     /**
      * @return CPU's registers: a, x, y, pc, and sp.
@@ -81,8 +92,6 @@ public:
      * @return The number of cycles taken to execute the program.
      */
     std::size_t execute(std::span<const std::uint8_t> program);
-
-    CPU() : reg{}, flags{}, mem{} {};
 };
 
 }  // namespace emulator
