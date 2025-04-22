@@ -121,6 +121,22 @@ public:
      */
     std::size_t execute(std::span<const std::uint8_t> program);
 
+    /**
+     * @brief Execute an instruction
+     *
+     * @param program A span of bytes representing the program to be executed.
+     * @param instructions An iterator to the instruction set.
+     * @return An optional InstructionConfig object containing the number of bytes read and cycles
+     * taken.
+     */
+    std::optional<InstructionConfig> execute_instruction(
+        std::span<const std::uint8_t> program, std::array<Instruction, 256>::iterator instructions);
+
+    /**
+     * @brief Get the instruction set
+     *
+     * @return A std::array of Instruction objects representing the instruction set.
+     */
     std::array<Instruction, 256> get_instruction_set();
 };
 

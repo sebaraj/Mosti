@@ -1,5 +1,7 @@
 #include <Mosti/emulator.h>
 
+#include "addressing.h"
+
 namespace emulator {
 
 bool operator==(Flags const& lhs, Flags const& rhs) {
@@ -31,6 +33,17 @@ std::uint8_t CPU::serialize_flags() const {
             | static_cast<int>(flags.b) << 4 | static_cast<int>(flags.d) << 3
             | static_cast<int>(flags.i) << 2 | static_cast<int>(flags.z) << 1
             | static_cast<int>(flags.c));
+}
+
+// TODO: Implement functions
+std::optional<InstructionConfig> execute_instruction(
+    std::span<const std::uint8_t> program,
+    std::array<CPU::Instruction, 256>::iterator instructions) {
+    return std::nullopt;
+}
+//
+std::array<CPU::Instruction, 256> get_instruction_set() {
+    return std::array<CPU::Instruction, 256>{};
 }
 
 }  // namespace emulator
