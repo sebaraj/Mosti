@@ -1,7 +1,5 @@
 #include <Mosti/emulator.h>
 
-#include "instruction_config.h"
-
 namespace emulator {
 
 bool operator==(Flags const& lhs, Flags const& rhs) {
