@@ -6,12 +6,14 @@ using CMake, Ninja, Conan, GoogleTest, and Doxygen.
 
 ### Motivation
 
-Although the 6502 is a relative simple architecture and courses such as Computer
+Although the 6502 is a relatively simple architecture and courses such as Computer
 Architecture and Operating Systems have given me practical experience working at
-much high complexities, the motivation for this project was to get familiar with
+much higher complexities, the motivation for this project was to become familiar with
 the tooling (build, package management, testing, and documentation) of a
 modern C++ project.
 
-### Opcodes
+### Features
+
+### Opcode Support
 
 http://www.6502.org/tutorials/6502opcodes.html

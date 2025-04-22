@@ -18,6 +18,31 @@
 #define CLOCK_SPEED_MHZ 1.023  // Apple II
 #endif                         // CLOCK_SPEED_MHZ
 
+/**
+ * @brief InstructionConfig struct
+ *
+ * Contains the configuration for an instruction, bytes read, and cycles taken.
+ */
+struct InstructionConfig {
+    size_t bytes;
+    size_t cycles;
+
+    /**
+     * @brief Constructor for InstructionConfig
+     *
+     * @param bytes_read Number of bytes read
+     * @param cycles Number of cycles taken
+     */
+    InstructionConfig(size_t bytes_read, size_t cycles) : bytes(bytes_read), cycles(cycles) {}
+
+    /**
+     * @brief Constructor for InstructionConfig with default (0) cycles
+     *
+     * @param bytes_read Number of bytes read
+     */
+    InstructionConfig(size_t bytes_read) : bytes(bytes_read), cycles(0) {}
+};
+
 namespace emulator {
 struct Flags {
     bool n;
@@ -53,16 +78,30 @@ bool operator==(Registers const& lhs, Registers const& rhs);
  */
 class CPU {
 private:
-    Registers reg{};
-    Flags flags{};
     std::array<uint8_t, 0x10000> mem{};
     double clock_speed = CLOCK_SPEED_MHZ;
 
 public:
+    Registers reg{};
+    Flags flags{};
+    using Instruction = std::function<std::optional<InstructionConfig>(
+        emulator::CPU&, std::span<const std::uint8_t>)>;
+
+    /**
+     * @bried Default constructor
+     */
+
+    CPU() : mem{}, reg{}, flags{} {};
+
     /**
      * @return CPU's flags: n, v, b, d, i, z, and c.
      */
     Flags get_flags() const;
+
+    /**
+     * @return CPU's flags: n, v, b, d, i, z, and c as a byte.
+     */
+    std::uint8_t serialize_flags() const;
 
     /**
      * @return CPU's registers: a, x, y, pc, and sp.
@@ -82,7 +121,23 @@ public:
      */
     std::size_t execute(std::span<const std::uint8_t> program);
 
-    CPU() : reg{}, flags{}, mem{} {};
+    /**
+     * @brief Execute an instruction
+     *
+     * @param program A span of bytes representing the program to be executed.
+     * @param instructions An iterator to the instruction set.
+     * @return An optional InstructionConfig object containing the number of bytes read and cycles
+     * taken.
+     */
+    std::optional<InstructionConfig> execute_instruction(
+        std::span<const std::uint8_t> program, std::array<Instruction, 256>::iterator instructions);
+
+    /**
+     * @brief Get the instruction set
+     *
+     * @return A std::array of Instruction objects representing the instruction set.
+     */
+    std::array<Instruction, 256> get_instruction_set();
 };
 
 }  // namespace emulator
