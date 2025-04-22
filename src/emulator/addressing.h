@@ -4,7 +4,7 @@
     Addressing helpers - zeropage + reg, indexed indirect, indirect indexed helpers
 */
 
-/*
+/**
  * @brief aids in getting the indexed zeropage address
  * from the given argument to the opcode
  *
@@ -19,7 +19,7 @@
 inline std::uint16_t zeropage_indexed(emulator::CPU& cpu, const std::uint8_t value,
                                       std::uint8_t emulator::Registers::* index);
 
-/*
+/**
  * @brief aids in getting the absolute indexed
  * address for absolute indexed addressing opcodes
  *
@@ -37,7 +37,7 @@ inline std::uint16_t absolute_indexed(emulator::CPU& cpu, const std::uint8_t lsb
                                       const std::uint8_t hsb,
                                       std::uint8_t emulator::Registers::* index);
 
-/*
+/**
  * @brief aids with the fetching of an indirect address
  *
  * @param cpu: object to operate on
@@ -48,7 +48,7 @@ inline std::uint16_t absolute_indexed(emulator::CPU& cpu, const std::uint8_t lsb
  */
 inline std::uint16_t indirect(emulator::CPU& cpu, const std::uint16_t val);
 
-/*
+/**
  * @brief aids with the fetching of a indexed indirect opcode mode
  *
  * @param cpu: object to operate on
@@ -59,7 +59,7 @@ inline std::uint16_t indirect(emulator::CPU& cpu, const std::uint16_t val);
  */
 inline std::uint16_t indexed_indirect(emulator::CPU& cpu, const std::uint8_t val);
 
-/*
+/**
  * @brief aids with the fetching of an indirect indexed opcode mode
  *
  * @param cpu: object to operate on

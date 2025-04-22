@@ -78,12 +78,12 @@ bool operator==(Registers const& lhs, Registers const& rhs);
  */
 class CPU {
 private:
-    Registers reg{};
-    Flags flags{};
     std::array<uint8_t, 0x10000> mem{};
     double clock_speed = CLOCK_SPEED_MHZ;
 
 public:
+    Registers reg{};
+    Flags flags{};
     using Instruction = std::function<std::optional<InstructionConfig>(
         emulator::CPU&, std::span<const std::uint8_t>)>;
 
@@ -91,7 +91,7 @@ public:
      * @bried Default constructor
      */
 
-    CPU() : reg{}, flags{}, mem{} {};
+    CPU() : mem{}, reg{}, flags{} {};
 
     /**
      * @return CPU's flags: n, v, b, d, i, z, and c.
